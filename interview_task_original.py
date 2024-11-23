@@ -9,33 +9,41 @@ grape: 6
 """
 
 
-class data_processor:
+class DataProcessor:
 
     def __init__(self, filename):
-        self.name = filename
+        self.filename = filename
 
-    def processData(self):
-        res = {}
-        file = open(self.name)
-        f = [i for i in file]
-        for i in range(len(f)):
-            s = f[i].strip()
-            if type(s) == str:
-                s_list = s.split(':')
-                x = []
-                x.append(s_list[0])
-                x.append(s_list[1])
-                key = x[0]
-                value = int(x[1])
-                if key in res.keys():
-                    for exist_key, exist_value in res.items():
-                        if key == exist_key:
-                            res[key] = exist_value + value
+    def process_data(self):
+        result = {}
+
+        # Открываем файл через контекстный менеджер
+        with open(self.filename, 'r', encoding='utf-8') as file:
+            for line in file:
+                line = line.strip()
+                if ':' not in line:
+                    continue  # Пропускаем строки без разделителя ':'
+
+                key, value = line.split(':', 1)
+                key = key.strip()
+                value = value.strip()
+
+                # Пропускаем строки с некорректным значением
+                if not value.isdigit():
+                    continue
+
+                value = int(value)
+                # Добавляем данные в результат
+                if key in result:
+                    result[key] += value
                 else:
-                    res.update({key: value})
+                    result[key] = value
+
+        # Вывод результата
         print("Итог по всем покупкам:")
-        print(res)
+        for key, value in result.items():
+            print(f"{key}: {value}")
 
 
-processor = data_processor('data.txt')
-processor.processData()
+processor = DataProcessor('data.txt')
+processor.process_data()
