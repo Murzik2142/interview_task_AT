@@ -53,7 +53,7 @@ class DataProcessor:
                 result[key] = value
 
         return result
-    
+        
 if __name__ == "__main__":
     # Указываем путь к файлу относительно корня проекта
     filename = "data/data.txt"
