@@ -101,7 +101,7 @@ project/
 
 ## Контакты
 
-Автор: **Murzabaev Marat** 
+Автор: **Murzabaev Marat**  
 Email: **github-marat@albusfox.ru**  
 GitHub: [Murzik2142](https://github.com/Murzik2142)
 
